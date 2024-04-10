@@ -46,14 +46,14 @@ export default function MyAccount() {
   useEffect(() => {
     const verifyTokenAndProceedToMyProfile = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("usertoken");
         if (!token) {
           // Redirect to login page or display a message
           navigate("/login");
           return;
         }
 
-        const response = await fetch("http://localhost:3001/verify-token", {
+        const response = await fetch("https://campuscrave-backend.onrender.com/verify-token", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

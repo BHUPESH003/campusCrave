@@ -4,12 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { socialLinksLogin } from "../../Data/Links";
 import CIcon from "@coreui/icons-react";
 import { useUser } from "../../UserContext";
+import { env } from "../../../env";
+import { useSetAtom } from "jotai";
+import { userAuth } from "../../store";
 export default function LoginPage() {
   const navigate = useNavigate();
   const { setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error , setError] = useState(null);
+  const [error, setError] = useState(null);
   // const handleLogin = async () => {
   //   try {
   //     const response = await axios.post('http://localhost:3000/api/v1/user/login', {
@@ -28,10 +31,11 @@ export default function LoginPage() {
   //     console.error('Login failed:', error);
   //   }
   // };
+  const setuserAuth = useSetAtom(userAuth);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/api/v1/user/login", {
+      const response = await fetch(`${env.baseUrl}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,14 +48,14 @@ export default function LoginPage() {
       }
 
       const data = await response.json();
-      
 
-      localStorage.setItem("token", data.token);
-      navigate('/')
+      setuserAuth(true);
+      localStorage.setItem("usertoken", data.token);
+      navigate("/");
       // Redirect or navigate to another page
     } catch (error) {
       console.error("Login error:", error.message);
-      setError(error.message)
+      setError(error.message);
       // Handle login error (e.g., display error message)
     }
   };
@@ -64,17 +68,25 @@ export default function LoginPage() {
           style={{ height: "300px" }}
         >
           <h3 className="heading">Log In</h3>
-          <span className="sub-heading">Please sign in to your existing account</span>
+          <span className="sub-heading">
+            Please sign in to your existing account
+          </span>
         </div>
         <div className="col-md-6 d-none d-sm-flex flex-column align-items-center justify-content-center bg-color text-light  rounded">
           <h3 className="heading">Log In</h3>
-          <span className="sub-heading"> Please sign in to your existing account</span>
+          <span className="sub-heading">
+            {" "}
+            Please sign in to your existing account
+          </span>
         </div>
 
         <div className="col-md-6 px-3">
           <div className="d-flex flex-column align-items-center justify-content-center border border-5 rounded p-3 ">
             <Form>
-              <Form.Group className="mb-3  sub-body-font " controlId="formBasicEmail">
+              <Form.Group
+                className="mb-3  sub-body-font "
+                controlId="formBasicEmail"
+              >
                 <Form.Label className="body-font">Email address</Form.Label>
                 <Form.Control
                   onChange={(ev) => setEmail(ev.target.value)}
@@ -86,7 +98,10 @@ export default function LoginPage() {
                 </Form.Text>
               </Form.Group>
 
-              <Form.Group className="mb-3 sub-heading" controlId="formBasicPassword">
+              <Form.Group
+                className="mb-3 sub-heading"
+                controlId="formBasicPassword"
+              >
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   onChange={(ev) => setPassword(ev.target.value)}
@@ -94,7 +109,10 @@ export default function LoginPage() {
                   placeholder="Password"
                 />
               </Form.Group>
-              <Form.Group className="mb-3 heading" controlId="formBasicCheckbox">
+              <Form.Group
+                className="mb-3 heading"
+                controlId="formBasicCheckbox"
+              >
                 <Form.Check type="checkbox" label="Check me out" />
               </Form.Group>
               <div className="d-flex align-items-center justify-content-center">
@@ -104,15 +122,22 @@ export default function LoginPage() {
                   type="submit"
                   className="w-75 fw-bold"
                 >
-                 Log In
+                  Log In
                 </Button>
               </div>
             </Form>
-            {error && <Alert className="sub-body-font border-0 mt-3" variant="danger">Invalid email or incorrect Password</Alert>}
+            {error && (
+              <Alert className="sub-body-font border-0 mt-3" variant="danger">
+                Invalid email or incorrect Password
+              </Alert>
+            )}
             <span className="mt-5 body-font">
               Don't have an account ?{" "}
               <span>
-                <Link to={'/signup'} className="text-color text-decoration-none body-font">
+                <Link
+                  to={"/signup"}
+                  className="text-color text-decoration-none body-font"
+                >
                   SIGN UP
                 </Link>
               </span>

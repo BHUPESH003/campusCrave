@@ -57,6 +57,7 @@ export const cartItemQuantityAtom = atom((get) => {
   return totalQuantity;
 });
 
+
 // export const wishlistAtom = atom([]);
 // export const wishlistCountAtom = atom((get) => {
 //   const wishlistItems = get(wishlistAtom);
@@ -71,7 +72,7 @@ export const cartItemQuantityAtom = atom((get) => {
 // Atoms for bag payment, payment status, user authentication, checkout page, stripe secret, username, user data, and popup status
 // export const BagPayment = atom(true);
 // export const paymentStatus = atom(false);
-// export const userAuth = atom(null);
+export const userAuth = atom(false);
 // export const onCheckoutPage = atom(false);
 // export const stripeSecretAtom = atom(undefined);
 // export const usernameAtom = atom(localStorage.getItem("username"));

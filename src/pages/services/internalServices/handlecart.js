@@ -4,7 +4,7 @@ export const handleCartService = {
   emptyCartItem: (cartItems, itemId) => {
     let newCart = [];
     newCart = cartItems.filter((item) => item.productId !== itemId);
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("usertoken")) {
       dataService.saveCartData({ cartProducts: newCart }).then((x) => {
         newCart = x.cartProducts;
       });
@@ -46,7 +46,7 @@ export const handleCartService = {
         },
       ];
     }
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("usertoken")) {
       dataService.saveCartData({ cartProducts: newCart }).then((x) => {
         newCart = x.cartProducts;
       });
@@ -68,7 +68,7 @@ export const handleCartService = {
           }
         : item
     );
-    if (localStorage.getItem("token"))
+    if (localStorage.getItem("usertoken"))
       dataService.saveCartData({ cartProducts: newCart }).then((x) => {
         newCart = x.cartProducts;
       });
@@ -90,7 +90,7 @@ export const handleCartService = {
           : item
       );
     }
-    if (localStorage.getItem("token"))
+    if (localStorage.getItem("usertoken"))
       dataService.saveCartData({ cartProducts: newCart }).then((x) => {
         newCart = x.cartProducts;
       });

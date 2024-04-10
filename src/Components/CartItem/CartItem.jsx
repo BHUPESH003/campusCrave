@@ -9,9 +9,11 @@ import { cilTrash } from "@coreui/icons";
 import { s3 } from "../../../env.js";
 
 export default function CartItem(props) {
-  console.log(props)
   const [cartItem, setCartItems] = useAtom(cartAtomNew);
-  const slicedString=props.image_url.slice(2,props.image_url.length-2);
+  const slicedString = props.product.image_url.slice(
+    2,
+    props.product.image_url.length - 2
+  );
   const increaseBagCount = (data) => {
     // let cc = handleCartService.increaseCartCount(cartItem, data);
     // setCartItems([...cc]);
@@ -64,8 +66,7 @@ export default function CartItem(props) {
       prevCart.filter((item) => item.productId !== itemId)
     );
   };
- 
-  
+
   return (
     //     <div className="card d-flex flex-row"  style={{width : "14rem"}}>
     //   <img src={image}  className="card-img-top" alt="..." />
@@ -146,15 +147,18 @@ export default function CartItem(props) {
                 className=" border-0 bg-light text-black sub-heading mx-2"
                 onClick={() => decreaseBagCount(props)}
               >
-                
                 <span style={{ fontSize: "3rem" }}>-</span>
               </Button>
-              <span className="fw-bold text-center" style={{fontSize:'2rem'}}>{props.bagCount}</span>
+              <span
+                className="fw-bold text-center"
+                style={{ fontSize: "2rem" }}
+              >
+                {props.bagCount}
+              </span>
               <Button
                 className="border-0 bg-light text-black sub-heading mx-2"
                 onClick={() => increaseBagCount(props)}
               >
-             
                 <span style={{ fontSize: "3rem" }}>+</span>
               </Button>
               <Button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import vendorImage from "../../assets/Vendor2.jpg";
 import CartItem from "../../Components/CartItem/CartItem";
 import { useAtomValue } from "jotai";
@@ -8,7 +8,13 @@ import { loadStripe } from "@stripe/stripe-js";
 // import CircularJSON from "circular-json"; // Import CircularJSON library
 import { useNavigate } from "react-router-dom";
 export default function CheckOut() {
+  let cartValue;
+
   const cartItems = useAtomValue(cartAtomNew);
+  useEffect(() => {
+    cartValue = localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, []);
+  console.log("cart", cartValue);
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => {
       return total + parseFloat(item.product.price) * item.bagCount;
@@ -30,21 +36,8 @@ export default function CheckOut() {
   //   );
   //   return totalVendorTime / cartItems.length; // Calculate average
   // };
-  // const calculateFoodReadyTime = (cartItems) => {
-  //   // Calculate average time from cartItems
-  //   const avgTimeInMinutes = calculateAverageVendorTime(cartItems);
 
-  //   // Calculate food ready time by adding avg time to current time
-  //   const currentTime = new Date();
-  //   const foodReadyTime = new Date(
-  //     currentTime.getTime() + avgTimeInMinutes * 60000
-  //   ); // Convert minutes to milliseconds
-
-  //   return foodReadyTime.toISOString();
-  // };
- 
   const calculateFoodReadyTime = (cartItems) => {
-    
     if (cartItems.length === 0) {
       // If cart is empty, return null or any default value
       return null;
@@ -61,7 +54,6 @@ export default function CheckOut() {
     // Return a valid date string
     return foodReadyTime;
   };
-  console.log(cartItems)
   const transformedData = {
     products: {
       orderTime: new Date().toISOString(), // Current time
@@ -77,105 +69,25 @@ export default function CheckOut() {
     },
   };
 
-
-  // const makePayment = async () => {
-  //   const tokenResponse = await fetch("http://localhost:3000/verify-token", {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-
-  //   if (!response.ok) {
-  //     // Handle unauthorized access or invalid token
-  //     // Redirect to login page or display a message
-  //     return;
-  //   }
-
-  //   const { userId } = await tokenResponse.json();
-  //   const stripe = await loadStripe(
-  //     "pk_test_51OydDmSGp7YEjcqZzGGwgEehYBbbGb5jKar9wIDDwEyK1liKLUv5aZY1XZr9jsu2WcgvwvPF4U83hibDdFZte1j7003TVYhJvi"
-  //   );
-
-  //   const response = await fetch(
-  //     "http://localhost:3000/create-checkout-session",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         products: transformedData,
-  //       }),
-  //     }
-  //   );
-
-  //   const session = await response.json();
-
-  //   console.log(session);
-
-  //   const result = stripe.redirectToCheckout({
-  //     sessionId: session.id,
-  //   });
-
-  //   if (result.error) {
-  //     console.log(result.error);
-  //   }
-  // };
-
-  // async function createCheckoutSession(data) {
-  //   try {
-  //     const response = await fetch(
-  //       "http://localhost:3000/create-checkout-session",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ products: data }),
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to create checkout session");
-  //     }
-
-  //     const session = await response.json();
-
-  //     // Initialize Stripe with your publishable key
-  //     const stripe = loadStripe(
-  //       "pk_test_51OydDmSGp7YEjcqZzGGwgEehYBbbGb5jKar9wIDDwEyK1liKLUv5aZY1XZr9jsu2WcgvwvPF4U83hibDdFZte1j7003TVYhJvi"
-  //     );
-
-  //     // Redirect to the Stripe checkout session
-  //     const { error } = await stripe.redirectToCheckout({
-  //       sessionId: session.id,
-  //     });
-
-  //     if (error) {
-  //       throw new Error("Failed to redirect to checkout");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error creating checkout session:", error);
-  //     throw error;
-  //   }
-  // }
   const navigate = useNavigate();
   const verifyTokenAndProceedToCheckout = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("usertoken");
       if (!token) {
         // Redirect to login page or display a message
         navigate("/login");
         return;
       }
 
-      const response = await fetch("http://localhost:3001/verify-token", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://campuscrave-backend.onrender.com/verify-token",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         // Handle unauthorized access or invalid token
@@ -199,7 +111,7 @@ export default function CheckOut() {
       console.log(transformedData.products);
 
       const checkoutSessionResponse = await fetch(
-        "http://localhost:3001/create-checkout-session",
+        "https://campuscrave-backend.onrender.com/create-checkout-session",
         {
           method: "POST",
           headers: {
