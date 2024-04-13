@@ -49,7 +49,6 @@ const token = localStorage.getItem('usertoken')
       }
       const data = await response.json();
       setOrders(data);
-      console.log(data);
     } catch (error) {
       console.error("Error fetching orders:", error);
     }
@@ -91,10 +90,9 @@ const token = localStorage.getItem('usertoken')
     verifyTokenAndProceedToMyProfile();
   }, []);
 
-  console.log(orders);
 
   return (
-    <div className="bg-primary text-white ">
+    <div className="bg-primary text-white pb-5">
        <ToastContainer autoClose={2000}  style={{fontSize:"6rem"}}/>
       <div className="row p-4 ">
         <div className="col-6  text-center heading ">
@@ -177,7 +175,7 @@ const token = localStorage.getItem('usertoken')
               </Nav>
             </Col>
             <Col sm={9}>
-              <Tab.Content className=" d-flex flex-column justify-content-center overflow-auto" style={{maxWidth: "1400px", maxHeight:"500px" }}>
+              <Tab.Content className=" d-flex flex-column justify-content-center overflow-y-auto overflow-x-none" style={{maxWidth: "1400px", maxHeight:"500px" }}>
                 <Tab.Pane eventKey="first" >
                   {orders.map((order) => (
                     <MyOrders {...order} />

@@ -80,7 +80,7 @@ const FoodItem = ({ item_name, vendor_name, vendor_rating, avg_rating, price, it
         <div>
           <img
             className="img-fluid rounded"
-            style={{ width: "100%", height: "15vw", objectFit: "cover" }}
+            style={{ width: "100vw",height:'25vh' }}
             src={s3.baseUrl + slicedString}
             alt={item_name}
           />
@@ -95,7 +95,7 @@ const FoodItem = ({ item_name, vendor_name, vendor_rating, avg_rating, price, it
 
             <div className="body-font fw-semibold" style={{ color: "#0d6efd" }}>
               {item_name}{" "}
-              <span className="body-font fw-normal">🌟 : {avg_rating}</span>
+              <span className="body-font fw-normal">🌟 : {parseFloat(avg_rating).toFixed(1)}</span>
             </div>
           </div>
 

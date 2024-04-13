@@ -24,7 +24,6 @@ export default function CategoryDetails() {
           throw new Error("Failed to fetch menu items");
         }
         const data = await response.json();
-        console.log(data)
 
         setMenuItems(data);
       } catch (error) {
@@ -34,7 +33,6 @@ export default function CategoryDetails() {
 
     fetchMenuItems();
   }, [categoryId]);
-  console.log(menuItems);
 
   return (
     <div className="container">

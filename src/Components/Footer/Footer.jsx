@@ -1,4 +1,4 @@
-import { cibDribbble, cibFacebook, cibGoogle, cibTwitter, cilEnvelopeClosed, cilHome, cilPhone, cilPrint } from '@coreui/icons'
+import { cibDribbble, cibFacebook, cibGoogle, cibInstagram, cibTwitter, cilEnvelopeClosed, cilHome, cilPhone, cilPrint } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import React from 'react'
 
@@ -7,7 +7,7 @@ function Footer() {
     
 
 
-    <div className="text-white  text-center text-lg-start bg-dark ">
+    <div className="text-white  text-center text-lg-start bg-dark mt-3">
     
     <div className="container p-4">
      
@@ -27,16 +27,16 @@ function Footer() {
   
           <div className="mt-4">
             
-          <a href="https://www.facebook.com" className="text-white m-3">
+          <a href="https://www.facebook.com/bhupesh.ahir.16"  target='blank' className="text-white m-3">
           <CIcon icon={cibFacebook} size='xxl' />
               </a>
-              <a href="https://www.google.com" className="text-white m-3">
+              <a href="https://www.netlify.app"   target='blank' className="text-white m-3">
               <CIcon icon={cibGoogle} size='xxl'/>
               </a>
-              <a href="https://www.dribbble.com" className="text-white m-3">
-              <CIcon icon={cibDribbble} size='xxl' />
+              <a href="https://www.instagram.com/ydv.bhupesh"  target='blank' className="text-white m-3">
+              <CIcon icon={cibInstagram} size='xxl' />
               </a>
-              <a href="https://www.twitter.com" className="text-white m-3">
+              <a href="https://www.twitter.com/ygbhupesh003" target='blank' className="text-white m-3">
               <CIcon icon={cibTwitter} size='xxl'/>
               </a>
           </div>
@@ -56,13 +56,13 @@ function Footer() {
                 </span><span className="ms-2 body-font">New Delhi, DL 10012, India</span>
             </li>
             <li className="mb-3">
-              <span className="fa-li"><CIcon icon={cilEnvelopeClosed} size='xxl'/></span><span className="ms-2 body-font">info@example.com</span>
+              <span className="fa-li"><CIcon icon={cilEnvelopeClosed} size='xxl'/></span><span className="ms-2 body-font">info@campuscrave.in</span>
             </li>
             <li className="mb-3">
-              <span className="fa-li"><CIcon icon={cilPhone} size='xxl'/></span><span className="ms-2 body-font">+ 91 234 567 88</span>
+              <span className="fa-li"><CIcon icon={cilPhone} size='xxl'/></span><span className="ms-2 body-font">+ 91 99 88 77 66 55</span>
             </li>
             <li className="mb-3">
-              <span className="fa-li"><CIcon icon={cilPrint} size='xxl'/></span><span className="ms-2 body-font">+ 91 234 567 89</span>
+              <span className="fa-li"><CIcon icon={cilPrint} size='xxl'/></span><span className="ms-2 body-font">+ 91 99 88 77 66 55</span>
             </li>
           </ul>
         </div>
@@ -95,7 +95,7 @@ function Footer() {
     </div>
   
     <div className="text-center p-3 body-font" >
-      © 2024 
+      CAMPUSCRAVE © 2024 
       
     </div>
     

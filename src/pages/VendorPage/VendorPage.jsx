@@ -56,7 +56,7 @@ export default function VendorPage() {
             🌟
             {vendorDetails &&
               vendorDetails[0] &&
-              parseFloat(vendorDetails[0].vendor_avg_rating).toFixed(2)}
+              parseFloat(vendorDetails[0].vendor_avg_rating).toFixed(1)}
           </span>
         </div>
         <div className="border-success border-top pt-3 mt-3 ">

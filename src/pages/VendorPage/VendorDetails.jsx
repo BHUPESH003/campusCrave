@@ -68,23 +68,13 @@ const VendorDetails = (props) => {
       ]);
     
   };
-  function extractPath(jsonString) {
-    try {
-      const extractedValue = JSON.parse(jsonString);
-      const path = Object.keys(extractedValue)[0];
-      return path;
-    } catch (error) {
-      // console.error("Error parsing JSON:", error);
-      return null;
-    }
-  }
+
   // console.log(props.image_url)
   const notify = () => toast.success('Added to cart!'
     );
   
   const slicedString=props.image_url.slice(2,props.image_url.length-2);
   // const slicedStringAgain=slicedString.slice(slicedString.length-2,slicedString.length)
-  console.log(slicedString)
   return (
   
     <div class="row border-bottom border-2 my-4">
@@ -95,7 +85,7 @@ const VendorDetails = (props) => {
           <span className="d-flex justify-content-between">
             <span className="body-font fw-semibold">₹{props.price} </span>
             <span className="body-font">
-              🌟{parseFloat(props.avg_rating).toFixed(2)}{" "}
+              🌟{parseFloat(props.avg_rating).toFixed(1)}{" "}
             </span>
             {/* <button className="bg-light text-black border-1 border-secondary px-2 py-1 rounded body-font">
               ADD+
