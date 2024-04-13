@@ -9,10 +9,13 @@ import { useAtom } from "jotai";
 import { cartAtomNew } from "../../store";
 import CartToast from "../../Components/CartToast/CartToast";
 import { s3 } from "../../../env";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const VendorDetails = (props) => {
+  console.log(props)
   const [cartItems, setCartItems] = useAtom(cartAtomNew);
-  const [showToast, setShowToast] = useState(false);
+  
   // const handleAddToCart = (data) => {
   //   // console.log(cartItems)
   // //   let cc = handleCartService.updateCartApi(cartItems, data);
@@ -63,10 +66,7 @@ const VendorDetails = (props) => {
           totalAmount: data.price,
         },
       ]);
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
+    
   };
   function extractPath(jsonString) {
     try {
@@ -79,24 +79,23 @@ const VendorDetails = (props) => {
     }
   }
   // console.log(props.image_url)
+  const notify = () => toast.success('Added to cart!'
+    );
   
   const slicedString=props.image_url.slice(2,props.image_url.length-2);
   // const slicedStringAgain=slicedString.slice(slicedString.length-2,slicedString.length)
   console.log(slicedString)
   return (
+  
     <div class="row border-bottom border-2 my-4">
-      <CartToast
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        itemName={props.item_name}
-      />
+       
       <div className="col-9 align-self-center ">
         <div>
           <div className="my-4"><span className="sub-heading fw-bold">{props.item_name}</span></div>
           <span className="d-flex justify-content-between">
             <span className="body-font fw-semibold">₹{props.price} </span>
             <span className="body-font">
-              🌟{parseFloat(props.item_avg_rating).toFixed(2)}{" "}
+              🌟{parseFloat(props.avg_rating).toFixed(2)}{" "}
             </span>
             {/* <button className="bg-light text-black border-1 border-secondary px-2 py-1 rounded body-font">
               ADD+
@@ -105,6 +104,7 @@ const VendorDetails = (props) => {
               className="bg-light text-black border-1 border-secondary rounded"
               onClick={() => {
                 handleAddToCart(props);
+                notify();
               }}
             >
               <span style={{ fontSize: "1.2rem" }}>ADD +</span>
@@ -130,6 +130,7 @@ const VendorDetails = (props) => {
         {/* <Button style={{width:'5vw',left:'45vw',top:'100vw'}} className='bg-light text-black  position-absolute  translate-middle-x translate-middle-y p-2 border border-success'><span className="body-font fw-bold m-2 ">ADD</span><CIcon className="mt-2" icon={cilPlus} size="xxl" /></Button> */}
       </div>
     </div>
+    
   );
 };
 

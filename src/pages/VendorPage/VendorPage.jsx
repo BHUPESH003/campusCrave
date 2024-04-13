@@ -8,6 +8,8 @@ import VendorDetails from "./VendorDetails";
 import { getAllVendorsLoadableAtom } from "../../store";
 import { useAtomValue } from "jotai";
 import { dataService } from "../services/apiServices/dataService";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export default function VendorPage() {
   const [vendorDetails, setVendorDetails] = useState();
@@ -37,6 +39,7 @@ export default function VendorPage() {
 
   return (
     <div className="container">
+      <ToastContainer autoClose={2000}  style={{fontSize:"6rem"}}/>
       <div className="row p-4 ">
         <div className="col-9">
           <span className="heading fw-bold">

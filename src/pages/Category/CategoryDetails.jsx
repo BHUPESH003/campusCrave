@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FoodItem from "../../Components/FoodItem/FoodItem";
 import { env } from "../../../env";
-import { Alert } from "react-bootstrap";
+
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export default function CategoryDetails() {
   const { categoryId } = useParams();
   console.log(categoryId);
   const [menuItems, setMenuItems] = useState([]);
-  const [alertMessage , setAlertMessage] = useState(false);
+  
 
-const handleAlertMessage =(newState)=>{
-  setAlertMessage(newState);
-}
+
 
   useEffect(() => {
     const fetchMenuItems = async () => {
@@ -38,19 +38,11 @@ const handleAlertMessage =(newState)=>{
 
   return (
     <div className="container">
-      {alertMessage && ( <Alert
-          variant="success"
-          className="position-fixed top-0 start-50 translate-middle-x"
-          show={alertMessage}
-          onClose={() => handleAlertMessage(false)}
-          dismissible
-        >
-          Item added to cart successfully!
-        </Alert>)}
+      <ToastContainer autoClose={2000}  style={{fontSize:"6rem"}}/>
       <h2 className="sub-heading">Menu Items for Category {categoryId}</h2>
       <div className="row ">
         {menuItems.map((menuItem) => (
-          <FoodItem {...menuItem } handleAlertMessage={handleAlertMessage}  />
+          <FoodItem {...menuItem }   />
         ))}
       </div>
     </div>

@@ -5,8 +5,11 @@ import { useAtomValue } from "jotai";
 import { cartAtomNew } from "../../store";
 import { env } from "../../../env";
 import { loadStripe } from "@stripe/stripe-js";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 // import CircularJSON from "circular-json"; // Import CircularJSON library
 import { useNavigate } from "react-router-dom";
+
 export default function CheckOut() {
   let cartValue;
 
@@ -145,9 +148,11 @@ export default function CheckOut() {
   const handleCheckout = async () => {
     await verifyTokenAndProceedToCheckout();
   };
+  const notify = () => toast.info(' Proceed to pay');
 
   return (
     <div className="container w-75 my-2">
+      <ToastContainer autoClose={2000}  style={{fontSize:"6rem"}}/>
       <div className="row shadow pt-3">
         <div className="row pt-2 px-3">
           <div className="col-2">
@@ -179,6 +184,7 @@ export default function CheckOut() {
           type="button"
           className="btn btn-dark w-75"
           onClick={() => {
+            notify();
             handleCheckout();
           }}
         >
