@@ -16,6 +16,8 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import { env } from "../../../env";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyAccount() {
   const [activeTab, setActiveTab] = useState("first");
@@ -29,10 +31,19 @@ export default function MyAccount() {
       setActiveTab(selectedTab);
     }
   };
-
+const token = localStorage.getItem('usertoken')
   async function fetchOrders(username) {
     try {
-      const response = await fetch(`${env.baseUrl}/orders/${username}`); // Make request to backend endpoint
+      const response = await fetch(`${env.baseUrl}/orders/${username}`,{
+        
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+           
+            Authorization: `Bearer ${token}`,
+         
+          }
+      }); // Make request to backend endpoint
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
       }
@@ -84,6 +95,7 @@ export default function MyAccount() {
 
   return (
     <div className="bg-primary text-white ">
+       <ToastContainer autoClose={2000}  style={{fontSize:"6rem"}}/>
       <div className="row p-4 ">
         <div className="col-6  text-center heading ">
           <span style={{ fontFamily: "cursive" }} className="heading">
@@ -165,7 +177,7 @@ export default function MyAccount() {
               </Nav>
             </Col>
             <Col sm={9}>
-              <Tab.Content className=" d-flex flex-column justify-content-center overflow-auto" style={{maxWidth: "1400px", maxHeight:"400px" }}>
+              <Tab.Content className=" d-flex flex-column justify-content-center overflow-auto" style={{maxWidth: "1400px", maxHeight:"500px" }}>
                 <Tab.Pane eventKey="first" >
                   {orders.map((order) => (
                     <MyOrders {...order} />

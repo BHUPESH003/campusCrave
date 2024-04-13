@@ -7,12 +7,15 @@ import { useUser } from "../../UserContext";
 import { env } from "../../../env";
 import { useSetAtom } from "jotai";
 import { userAuth } from "../../store";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 export default function LoginPage() {
   const navigate = useNavigate();
   const { setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const notify = () => toast.error('Log In Failed!');
   // const handleLogin = async () => {
   //   try {
   //     const response = await axios.post('http://localhost:3000/api/v1/user/login', {
@@ -46,22 +49,25 @@ export default function LoginPage() {
       if (!response.ok) {
         throw new Error("Login failed"); // or handle specific error cases
       }
-
+      
       const data = await response.json();
 
       setuserAuth(true);
       localStorage.setItem("usertoken", data.token);
+      
       navigate("/");
       // Redirect or navigate to another page
     } catch (error) {
       console.error("Login error:", error.message);
       setError(error.message);
+      notify();
       // Handle login error (e.g., display error message)
     }
   };
 
   return (
     <div className="container-fluid p-0 m-0">
+      <ToastContainer autoClose={2000}  style={{fontSize:"6rem"}}/>
       <div className="row d-block d-sm-flex">
         <div
           className="d-flex  d-sm-none flex-column align-items-center justify-content-center bg-color text-light mb-4 rounded"

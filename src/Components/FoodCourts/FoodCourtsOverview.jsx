@@ -4,7 +4,7 @@ import Vendor1 from "../../assets/Vendor1.jpg";
 import { Link } from "react-router-dom";
 import { s3 } from "../../../env";
 function FoodCourtsOverview(props) {
-  
+  console.log(props)
   const slicedString=props.image_path.slice(2,props.image_path.length-2);
   return (
     <div className="col-6 col-md-3 my-4 ">
@@ -19,7 +19,7 @@ function FoodCourtsOverview(props) {
           <div className="d-flex justify-content-start ">
             <span className="w-50 fw-semibold">
               <span className="p-2 body-font text-body">
-                🌟{props.overall_rating}
+                🌟{parseFloat(props.average_rating).toFixed(1)}
               </span>
             </span>
             <span className="w-50 fw-semibold">

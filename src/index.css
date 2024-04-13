@@ -100,3 +100,16 @@
   border-bottom-left-radius: 1rem;
   border-top-left-radius: 1rem;
 }
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}

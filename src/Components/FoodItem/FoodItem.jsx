@@ -6,24 +6,27 @@ import CIcon from "@coreui/icons-react";
 import { cartAtomNew } from "../../store";
 import { useAtom } from "jotai";
 import { s3 } from "../../../env";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
-const FoodItem = ({ item_name, vendor_name, vendor_rating, item_rating, price, item_id, vendor_id,image_url , handleAlertMessage }) => {
+const FoodItem = ({ item_name, vendor_name, vendor_rating, avg_rating, price, item_id, vendor_id,image_url  }) => {
   const [isItemBag, setisItemBag] = useState(false);
   const [cartItems, setCartItems] = useAtom(cartAtomNew);
   const slicedString=image_url.slice(2,image_url.length-2);
   const handleAddBag = () => {
     setisItemBag(!isItemBag);
   };
-
+  const notify = () => toast.success('Added to Cart');
   const handleAddToCart = () => {
     const currentItem = {
       item_name,
       vendor_name,
       vendor_rating,
-      item_rating,
+      avg_rating,
       price,
       item_id,
-      vendor_id
+      vendor_id,
+      image_url
     };
 
     const currentCartItem = cartItems.find((x) => x.productId === item_id);
@@ -68,7 +71,7 @@ const FoodItem = ({ item_name, vendor_name, vendor_rating, item_rating, price, i
       ]);
     }
     
-    handleAlertMessage(true); // Invoke handleAlertMessage to show the alert
+    
   };
 
   return (
@@ -87,12 +90,12 @@ const FoodItem = ({ item_name, vendor_name, vendor_rating, item_rating, price, i
           <div>
             <div className="body-font fw-semibold" style={{ color: "#0d6efd" }}>
               {vendor_name}'s{" "}
-              <span className="body-font fw-normal">🌟 : {vendor_rating}</span>
+              <span className="body-font fw-normal">🌟 : {parseFloat(vendor_rating).toFixed(1)}</span>
             </div>
 
             <div className="body-font fw-semibold" style={{ color: "#0d6efd" }}>
               {item_name}{" "}
-              <span className="body-font fw-normal">🌟 : {item_rating}</span>
+              <span className="body-font fw-normal">🌟 : {avg_rating}</span>
             </div>
           </div>
 
@@ -108,6 +111,7 @@ const FoodItem = ({ item_name, vendor_name, vendor_rating, item_rating, price, i
                 onClick={() => {
                   handleAddToCart();
                   handleAddBag();
+                  notify();
                 }}
               >
                 <span style={{ fontSize: "1.2rem" }}>ADD +</span>

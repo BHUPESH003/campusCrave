@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Categories from '../../Components/Categories/Categories'
 import FoodCourts from '../../Components/FoodCourts/FoodCourts'
-
+import { ToastContainer} from 'react-toastify';
 
 function Home() {
 
@@ -70,6 +70,7 @@ function Home() {
         <div className='sub-heading'>
          {greeting}   {username}
         </div>
+        
         
         <div>
         {/* <CategorySlider  data={sampleProductData} heading="What's on Your Mind" /> */}

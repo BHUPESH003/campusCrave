@@ -9,17 +9,13 @@ const CategorySlider = (props) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [index, setIndex] = useState(0);
   const carouselRef = useRef(null);
-
+  console.log(sliderCount)
   useEffect(() => {
-    if (props.data && props.data.length <= 6) {
-      setSliderCount([0]);
-    } else if (props.data && props.data.length > 6 && props.data.length <= 12) {
-      setSliderCount([0, 1]);
-    } else if (props.data && props.data.length > 12 && props.data.length < 18) {
-      setSliderCount([0, 1, 2]);
-    } else {
-      setSliderCount([0, 1, 2, 3]);
-    }
+    const itemsPerSlide = windowSize < 768 ? 3 : windowSize < 992 ? 4 : 5;
+    const totalSlides = Math.ceil(props.data.length / itemsPerSlide);
+    const newSliderCount = Array.from({ length: totalSlides }, (_, index) => index);
+
+    setSliderCount(newSliderCount);
 
     const handleWindowResize = () => {
       setWindowSize(window.innerWidth);
@@ -29,7 +25,7 @@ const CategorySlider = (props) => {
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, []);
+  }, [props.data,windowSize]);
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);

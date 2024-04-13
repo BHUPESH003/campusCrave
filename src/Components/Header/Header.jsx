@@ -73,7 +73,7 @@ function Header() {
                 <li>
                   <Link
                     className="dropdown-item body-font"
-                    to="/my-account/orders"
+                    to="/my-account"
                   >
                     Orders
                   </Link>
