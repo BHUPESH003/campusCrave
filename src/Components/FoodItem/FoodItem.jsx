@@ -101,7 +101,7 @@ const FoodItem = ({ item_name, vendor_name, vendor_rating, avg_rating, price, it
 
           <div style={{ width: "100%" }} className="d-flex justify-content-around align-items-center">
             <span className="body-font fw-semibold" style={{ color: "#198754" }}>
-              £{price}
+            ₹{price}
             </span>
             {isItemBag ? (
               <CIcon  icon={cilCart} size="xxl" style={{ color: "#dc3545", fontSize: "1.5rem" }} />

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import Header from "../../Components/Header/Header";
-import RenderSplash from "../SplashPage/RenderSplash";
+
 import Footer from "../../Components/Footer/Footer";
 const AppLayout = (props) => {
   return (

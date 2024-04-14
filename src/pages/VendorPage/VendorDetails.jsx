@@ -77,7 +77,7 @@ const VendorDetails = (props) => {
   // const slicedStringAgain=slicedString.slice(slicedString.length-2,slicedString.length)
   return (
   
-    <div class="row border-bottom border-2 my-4">
+    <div class="row border-bottom border-2 my-2">
        
       <div className="col-9 align-self-center ">
         <div>
@@ -107,15 +107,15 @@ const VendorDetails = (props) => {
 
         <div className="body-font  text-muted mt-2 col-12 col-sm-5 ">{props.item_description}</div>
       </div>
-      <div className="col-3 d-flex align-items-center justify-content-center  position-relative my-4">
+      <div className="col-3 text-center  d-flex align-items-center justify-content-center  position-relative my-4">
         <img
           // src={image}
           src={s3.baseUrl + slicedString
           }
 
           alt={props.item_name}
-          style={{ maxWidth: "100%", height: "auto" }}
-          className="rounded"
+          style={{ width: "100vw", height: "20vh" }}
+          className="rounded img-fluid"
         />
         {/* <Button style={{width:'5vw',left:'45vw',top:'100vw'}} className='bg-light text-black  position-absolute  translate-middle-x translate-middle-y p-2 border border-success'><span className="body-font fw-bold m-2 ">ADD</span><CIcon className="mt-2" icon={cilPlus} size="xxl" /></Button> */}
       </div>
