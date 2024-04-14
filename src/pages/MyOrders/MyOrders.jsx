@@ -74,7 +74,7 @@ export default function MyOrders(props) {
               </span>
             </Button>
             <span className="body-font text-muted fw-semibold">
-              {props.price}{" "}
+            ₹{props.price}{" "}
             </span>
 
             <Modal show={showModal} onHide={handleCloseModal}>

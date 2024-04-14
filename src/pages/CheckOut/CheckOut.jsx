@@ -174,7 +174,7 @@ export default function CheckOut() {
           </div>
           <div class="col-6 text-center text-right">
             {" "}
-            <h3 className="sub-heading fw-bold">{calculateSubtotal()}</h3>
+            <h3 className="sub-heading fw-bold">₹{calculateSubtotal()}</h3>
           </div>
         </div>
       </div>
